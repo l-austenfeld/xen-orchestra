@@ -1,6 +1,7 @@
 import { asyncMap } from '@xen-orchestra/async-map'
 import { defer as deferrable } from 'golike-defer'
 import { format } from 'json-rpc-peer'
+import { createPredicate } from 'value-matcher'
 import { Ref } from 'xen-api'
 import { incorrectState } from 'xo-common/api-errors.js'
 
@@ -179,12 +180,15 @@ export const rollingUpdate = deferrable(async function ($defer, { pool }) {
           }
         }
       } else {
-        if (this.getObject(id).$poolId === poolId) {
-          scheduledJobs.push(jobId)
-        }
+        // if (this.getObject(id).$poolId === poolId) {
+        //   scheduledJobs.push(jobId)
+        // }
       }
     } else {
       // SMARTMODE
+      if (vms.$pool === undefined || createPredicate(vms.$pool)(poolId)) {
+        scheduledJobs.push(jobId)
+      }
     }
   })
 
