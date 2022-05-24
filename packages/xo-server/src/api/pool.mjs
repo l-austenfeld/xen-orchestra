@@ -166,8 +166,7 @@ installPatches.description = 'Install patches on hosts'
 
 export const rollingUpdate = deferrable(async function ($defer, { pool }) {
   const poolId = pool.id
-  const schedules = await this.getAllSchedules()
-  const jobs = await this.getAllJobs('backup')
+  const [schedules, jobs] = await Promise.all([this.getAllSchedules(), this.getAllJobs('backup')])
 
   const jobsOfthePool = []
   jobs.forEach(({ id: jobId, vms }) => {
