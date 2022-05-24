@@ -1,8 +1,8 @@
 import { asyncMap } from '@xen-orchestra/async-map'
-import { defer as deferrable } from 'golike-defer'
-import { format } from 'json-rpc-peer'
 import { createPredicate } from 'value-matcher'
+import { defer as deferrable } from 'golike-defer'
 import { extractIdsFromSimplePattern } from '@xen-orchestra/backups/extractIdsFromSimplePattern.js'
+import { format } from 'json-rpc-peer'
 import { Ref } from 'xen-api'
 import { incorrectState } from 'xo-common/api-errors.js'
 
